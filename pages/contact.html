@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f8f3">
+    <title>Contact | Tasty Bite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["DM Sans", "sans-serif"],
+                        display: ["Playfair Display", "serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <!-- The shared demo-auth guard keeps private site routes behind the login screen. -->
+    <script src="../js/auth.js" defer></script>
+</head>
+<body class="bg-[#f7f8f3] font-sans text-stone-800 antialiased" data-requires-auth>
+    <!-- Navigation links stay relative because all HTML pages share the pages/ folder. -->
+    <header class="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-emerald-950/10 bg-white/90 px-5 py-4 shadow-sm backdrop-blur sm:px-7">
+            <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+                <a href="index.html" class="flex shrink-0 items-center gap-3 text-emerald-950" aria-label="Tasty Bite home">
+                    <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-900 text-white"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span>
+                    <span class="font-display text-2xl font-bold">Tasty <span class="text-orange-500">Bite</span></span>
+                </a>
+                <!-- On small screens links wrap beneath the logo; at sm they share the header row. -->
+                <nav class="order-3 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-semibold text-emerald-950 sm:order-none sm:w-auto sm:justify-end sm:gap-x-6 sm:text-base" aria-label="Main navigation">
+                    <a class="transition-colors hover:text-orange-600" href="index.html">Home</a>
+                    <a class="transition-colors hover:text-orange-600" href="index.html#recipes">Recipes</a>
+                    <a class="transition-colors hover:text-orange-600" href="planner.html">Planner</a>
+                    <a class="transition-colors hover:text-orange-600" href="favorites.html">Favorites</a>
+                    <a class="transition-colors hover:text-orange-600" href="about.html">About</a>
+                    <a class="text-orange-600 transition-colors hover:text-orange-700" href="contact.html" aria-current="page">Contact</a>
+                    <a class="rounded-full border border-emerald-900/15 px-3 py-1.5 text-sm transition-colors hover:border-orange-400 hover:text-orange-600" href="login.html" data-logout>Log out</a>
+                </nav>
+                <label class="flex w-full items-center gap-3 rounded-full border border-emerald-950/10 bg-stone-50 px-4 py-2 text-emerald-900 sm:w-56" aria-label="Search recipes">
+                    <i class="fa-solid fa-magnifying-glass text-sm" aria-hidden="true"></i>
+                    <input class="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-stone-400 focus:ring-0" type="search" placeholder="Search recipes">
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+        <section class="mb-10 text-center">
+            <p class="mb-3 text-xs font-bold uppercase text-emerald-700">We would love to hear from you</p>
+            <h1 class="font-display text-4xl font-bold text-emerald-950 sm:text-5xl">Let's talk food</h1>
+            <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-stone-600">Share a recipe question, a kitchen story, or an idea for Tasty Bite.</p>
+        </section>
+
+        <!-- Form and contact details stack on phones and become side-by-side from lg. -->
+        <section class="grid min-w-0 gap-7 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:gap-10">
+            <!-- This static project hands the validated message to the visitor's configured email app. -->
+            <form class="min-w-0 rounded-3xl border border-emerald-950/10 bg-white p-5 shadow-sm sm:p-8" action="mailto:hello@tastybite.com" method="post" enctype="text/plain">
+                <div class="grid gap-5 sm:grid-cols-2 sm:gap-6">
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-emerald-950" for="name">Name</label>
+                        <input class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-800 outline-none transition placeholder:text-stone-400 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10" id="name" name="Name" type="text" autocomplete="name" placeholder="Your name" required>
+                    </div>
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-emerald-950" for="email">Email</label>
+                        <input class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-800 outline-none transition placeholder:text-stone-400 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10" id="email" name="Email" type="email" autocomplete="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="mb-2 block text-sm font-semibold text-emerald-950" for="subject">Subject</label>
+                        <input class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-800 outline-none transition placeholder:text-stone-400 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10" id="subject" name="Subject" type="text" placeholder="How can we help?" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="mb-2 block text-sm font-semibold text-emerald-950" for="message">Message</label>
+                        <textarea class="min-h-40 w-full resize-y rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-800 outline-none transition placeholder:text-stone-400 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10" id="message" name="Message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
+                    </div>
+                </div>
+                <p class="mt-4 text-xs leading-5 text-stone-500">Submitting opens your email app with your message ready to send.</p>
+                <button class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-900 px-6 py-3.5 font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2 sm:w-auto" type="submit">
+                    Send message <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+            <aside class="flex min-w-0 flex-col justify-between gap-6 rounded-3xl bg-emerald-950 p-6 text-white shadow-lg sm:p-8">
+                <div>
+                    <p class="mb-3 text-xs font-bold uppercase text-orange-300">Contact</p>
+                    <h2 class="font-display text-3xl font-bold">A note from your kitchen to ours.</h2>
+                    <p class="mt-4 leading-7 text-emerald-50/75">Questions, feedback, and favorite recipes are always welcome.</p>
+                </div>
+                <div class="space-y-4">
+                    <a class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10" href="mailto:hello@tastybite.com">
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-orange-400 text-emerald-950"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
+                        <span class="min-w-0"><span class="block text-xs text-emerald-100/70">Email us</span><span class="break-all font-semibold">hello@tastybite.com</span></span>
+                    </a>
+                    <div class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-orange-400 text-emerald-950"><i class="fa-regular fa-clock" aria-hidden="true"></i></span>
+                        <span><span class="block text-xs text-emerald-100/70">Our kitchen</span><span class="font-semibold">Always open for good food</span></span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="mt-4 bg-emerald-950 text-white">
+        <div class="mx-auto grid max-w-7xl gap-9 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+            <div>
+                <a href="index.html" class="font-display text-2xl font-bold">Tasty <span class="text-orange-400">Bite</span></a>
+                <p class="mt-3 text-sm text-emerald-100/75">Better food. Happy you.</p>
+            </div>
+            <div class="space-y-2 text-sm text-emerald-100/80">
+                <h2 class="mb-3 font-bold text-white">Explore</h2>
+                <a class="block hover:text-orange-300" href="index.html">Home</a>
+                <a class="block hover:text-orange-300" href="index.html#recipes">Recipes</a>
+                <a class="block hover:text-orange-300" href="favorites.html">Favorites</a>
+            </div>
+            <div class="space-y-2 text-sm text-emerald-100/80">
+                <h2 class="mb-3 font-bold text-white">Tasty Bite</h2>
+                <a class="block hover:text-orange-300" href="about.html">About</a>
+                <a class="block hover:text-orange-300" href="contact.html">Contact</a>
+                <a class="block hover:text-orange-300" href="planner.html">Meal planner</a>
+            </div>
+            <p class="self-end text-sm text-emerald-100/65">© 2026 Tasty Bite. Made for food lovers.</p>
+        </div>
+    </footer>
+</body>
+</html>

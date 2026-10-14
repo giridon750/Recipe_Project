@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f8f3">
+    <title>Weekly Planner | Tasty Bite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["DM Sans", "sans-serif"],
+                        display: ["Playfair Display", "serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <!-- The shared demo-auth guard loads before planner page behavior. -->
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/planner.js" defer></script>
+</head>
+<body class="min-h-screen bg-[#f7f8f3] font-sans text-stone-800 antialiased" data-requires-auth>
+    <header class="mx-auto max-w-[1600px] px-4 pt-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-emerald-950/10 bg-white/90 px-5 py-4 shadow-sm backdrop-blur sm:px-7">
+            <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+                <a href="index.html" class="flex shrink-0 items-center gap-3 text-emerald-950" aria-label="Tasty Bite home">
+                    <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-900 text-white"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span>
+                    <span class="font-display text-2xl font-bold">Tasty <span class="text-orange-500">Bite</span></span>
+                </a>
+                <!-- Links wrap beneath the brand on mobile and align in one row at sm and above. -->
+                <nav class="order-3 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-semibold text-emerald-950 sm:order-none sm:w-auto sm:justify-end sm:gap-x-6 sm:text-base" aria-label="Main navigation">
+                    <a class="transition-colors hover:text-orange-600" href="index.html">Home</a>
+                    <a class="transition-colors hover:text-orange-600" href="favorites.html">Favorites</a>
+                    <a class="text-orange-600 transition-colors hover:text-orange-700" href="planner.html" aria-current="page">Planner</a>
+                    <a class="transition-colors hover:text-orange-600" href="contact.html">Contact</a>
+                    <a class="transition-colors hover:text-orange-600" href="about.html">About</a>
+                    <a class="rounded-full border border-emerald-900/15 px-3 py-1.5 text-sm transition-colors hover:border-orange-400 hover:text-orange-600" href="login.html" data-logout>Log out</a>
+                </nav>
+                <a href="favorites.html" class="inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-2 text-sm font-semibold text-emerald-900 transition hover:bg-orange-200">
+                    <i class="fa-regular fa-heart text-rose-600" aria-hidden="true"></i> Saved recipes
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-[1600px] px-4 pb-16 pt-8 sm:px-6 sm:pt-12 lg:px-8">
+        <section class="mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 px-6 py-9 text-white shadow-lg sm:px-10 sm:py-12">
+            <div class="flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
+                <div>
+                    <p class="mb-3 text-xs font-bold uppercase text-orange-300">A little more ease, all week</p>
+                    <h1 class="font-display text-4xl font-bold sm:text-5xl">Weekly meal planner</h1>
+                    <p id="week-label" class="mt-3 text-emerald-50/80"></p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button class="inline-flex items-center gap-2 rounded-xl bg-orange-400 px-5 py-3 font-bold text-emerald-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-200" type="button" data-open-planner>
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i> Plan a meal
+                    </button>
+                    <button class="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-semibold text-white transition hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/70" type="button" id="clear-plan">
+                        <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Clear plan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 rounded-3xl border border-orange-200/70 bg-orange-50 p-5 shadow-sm sm:p-7" aria-labelledby="today-heading" aria-live="polite">
+            <div class="mb-5 flex items-center gap-3">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-orange-400 text-emerald-950"><i class="fa-regular fa-sun" aria-hidden="true"></i></span>
+                <div>
+                    <p class="text-xs font-bold uppercase text-orange-800">A quick look at today</p>
+                    <h2 id="today-heading" class="font-display text-2xl font-bold text-emerald-950">Today's meal plan</h2>
+                </div>
+            </div>
+            <p id="today-empty" class="text-sm leading-6 text-stone-600">Nothing planned for today yet. Add a meal from the week below.</p>
+            <div id="today-items" class="flex flex-wrap gap-3"></div>
+        </section>
+
+        <section aria-labelledby="week-heading">
+            <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p class="mb-2 text-xs font-bold uppercase text-emerald-700">Monday to Sunday</p>
+                    <h2 id="week-heading" class="font-display text-3xl font-bold text-emerald-950 sm:text-4xl">Your week, at a glance</h2>
+                </div>
+                <p class="max-w-lg text-sm leading-6 text-stone-600">Choose a recipe for breakfast, lunch, dinner, or a snack. Edit or remove it any time.</p>
+            </div>
+            <!-- Day cards stack on phones, then flow into wider grids on tablets and desktop. -->
+            <div id="week-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <template id="day-template">
+        <article class="min-w-0 rounded-2xl border border-emerald-950/10 bg-white p-4 shadow-sm" data-day-card>
+            <div class="mb-4 flex items-start justify-between gap-2 border-b border-emerald-950/10 pb-3">
+                <div>
+                    <h3 class="font-display text-xl font-bold text-emerald-950" data-day-name></h3>
+                    <p class="mt-0.5 text-xs font-medium text-stone-500" data-day-date></p>
+                </div>
+                <span class="hidden rounded-full bg-orange-100 px-2.5 py-1 text-[0.65rem] font-bold uppercase text-orange-800" data-today-badge>Today</span>
+            </div>
+            <div class="space-y-3">
+                <section class="rounded-xl bg-emerald-50/70 p-3" data-meal-slot="breakfast">
+                    <div class="flex items-center gap-2 text-emerald-900"><i class="fa-solid fa-mug-hot text-sm" aria-hidden="true"></i><h4 class="text-sm font-bold">Breakfast</h4></div>
+                    <div class="mt-2 space-y-2" data-meal-items></div>
+                    <button class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 transition hover:text-orange-700" type="button" data-add-slot><i class="fa-solid fa-plus" aria-hidden="true"></i> Add meal</button>
+                </section>
+                <section class="rounded-xl bg-orange-50/80 p-3" data-meal-slot="lunch">
+                    <div class="flex items-center gap-2 text-emerald-900"><i class="fa-solid fa-bowl-food text-sm" aria-hidden="true"></i><h4 class="text-sm font-bold">Lunch</h4></div>
+                    <div class="mt-2 space-y-2" data-meal-items></div>
+                    <button class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 transition hover:text-orange-700" type="button" data-add-slot><i class="fa-solid fa-plus" aria-hidden="true"></i> Add meal</button>
+                </section>
+                <section class="rounded-xl bg-rose-50/70 p-3" data-meal-slot="dinner">
+                    <div class="flex items-center gap-2 text-emerald-900"><i class="fa-solid fa-moon text-sm" aria-hidden="true"></i><h4 class="text-sm font-bold">Dinner</h4></div>
+                    <div class="mt-2 space-y-2" data-meal-items></div>
+                    <button class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 transition hover:text-orange-700" type="button" data-add-slot><i class="fa-solid fa-plus" aria-hidden="true"></i> Add meal</button>
+                </section>
+                <section class="rounded-xl bg-sky-50/80 p-3" data-meal-slot="snacks">
+                    <div class="flex items-center gap-2 text-emerald-900"><i class="fa-solid fa-cookie-bite text-sm" aria-hidden="true"></i><h4 class="text-sm font-bold">Snacks</h4></div>
+                    <div class="mt-2 space-y-2" data-meal-items></div>
+                    <button class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 transition hover:text-orange-700" type="button" data-add-slot><i class="fa-solid fa-plus" aria-hidden="true"></i> Add meal</button>
+                </section>
+            </div>
+        </article>
+    </template>
+
+    <template id="planned-meal-template">
+        <article class="flex items-center gap-2 rounded-lg border border-white bg-white p-2 shadow-sm" data-planned-meal>
+            <img class="h-10 w-10 shrink-0 rounded-md object-cover" data-recipe-image alt="">
+            <div class="min-w-0 flex-1">
+                <p class="truncate text-xs font-semibold text-emerald-950" data-recipe-name></p>
+                <p class="text-[0.65rem] text-stone-500" data-recipe-category></p>
+            </div>
+            <div class="flex shrink-0 gap-1">
+                <button class="grid h-8 w-8 place-items-center rounded-lg text-stone-500 transition hover:bg-emerald-50 hover:text-emerald-800" type="button" data-edit aria-label="Edit planned meal"><i class="fa-solid fa-pen text-xs" aria-hidden="true"></i></button>
+                <button class="grid h-8 w-8 place-items-center rounded-lg text-rose-600 transition hover:bg-rose-50" type="button" data-remove aria-label="Remove planned meal"><i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i></button>
+            </div>
+        </article>
+    </template>
+
+    <template id="today-item-template">
+        <div class="flex items-center gap-2 rounded-xl border border-orange-200 bg-white px-3 py-2 text-sm text-emerald-950 shadow-sm">
+            <i class="text-orange-600" data-meal-icon aria-hidden="true"></i>
+            <span class="font-semibold" data-meal-name></span>
+            <span class="text-stone-500">·</span>
+            <span data-recipe-name></span>
+        </div>
+    </template>
+
+    <dialog id="planner-dialog" class="w-[calc(100%-2rem)] max-w-xl rounded-3xl border-0 p-0 shadow-2xl backdrop:bg-emerald-950/60">
+        <form id="meal-form" class="p-5 sm:p-8">
+            <div class="mb-6 flex items-start justify-between gap-4">
+                <div>
+                    <p class="mb-2 text-xs font-bold uppercase text-emerald-700">Make a plan</p>
+                    <h2 id="dialog-title" class="font-display text-3xl font-bold text-emerald-950">Add a meal</h2>
+                </div>
+                <button class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-stone-100 text-stone-600 transition hover:bg-stone-200" type="button" data-close-dialog aria-label="Close planner dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+                <label class="text-sm font-semibold text-emerald-950">Day
+                    <select class="mt-2 w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-3 text-stone-800 outline-none transition focus:border-emerald-700 focus:ring-4 focus:ring-emerald-700/10" name="date" id="plan-date" required></select>
+                </label>
+                <label class="text-sm font-semibold text-emerald-950">Meal
+                    <select class="mt-2 w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-3 text-stone-800 outline-none transition focus:border-emerald-700 focus:ring-4 focus:ring-emerald-700/10" name="meal" id="plan-meal" required>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="snacks">Snacks</option>
+                    </select>
+                </label>
+                <label class="text-sm font-semibold text-emerald-950 sm:col-span-2">Recipe
+                    <select class="mt-2 w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-3 text-stone-800 outline-none transition focus:border-emerald-700 focus:ring-4 focus:ring-emerald-700/10" name="recipe" id="plan-recipe" required>
+                        <option value="">Choose a recipe</option>
+                    </select>
+                </label>
+            </div>
+            <p id="recipe-load-message" class="mt-3 hidden text-sm text-rose-700" role="status"></p>
+            <div class="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                <button class="rounded-xl border border-stone-300 px-5 py-3 font-semibold text-stone-700 transition hover:bg-stone-50" type="button" data-close-dialog>Cancel</button>
+                <button class="rounded-xl bg-emerald-900 px-5 py-3 font-bold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2" type="submit">Save meal</button>
+            </div>
+        </form>
+    </dialog>
+
+    <footer class="mt-4 bg-emerald-950 text-white">
+        <div class="mx-auto grid max-w-[1600px] gap-9 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+            <div>
+                <a href="index.html" class="font-display text-2xl font-bold">Tasty <span class="text-orange-400">Bite</span></a>
+                <p class="mt-3 text-sm text-emerald-100/75">Better food. Happier you.</p>
+            </div>
+            <div class="space-y-2 text-sm text-emerald-100/80">
+                <h2 class="mb-3 font-bold text-white">Explore</h2>
+                <a class="block hover:text-orange-300" href="index.html">Home</a>
+                <a class="block hover:text-orange-300" href="favorites.html">Favorites</a>
+                <a class="block hover:text-orange-300" href="planner.html">Planner</a>
+            </div>
+            <div class="space-y-2 text-sm text-emerald-100/80">
+                <h2 class="mb-3 font-bold text-white">Get in touch</h2>
+                <a class="block hover:text-orange-300" href="contact.html">Contact</a>
+                <a class="block hover:text-orange-300" href="about.html">About Tasty Bite</a>
+            </div>
+            <p class="self-end text-sm text-emerald-100/65">Plan a little, enjoy a lot.</p>
+        </div>
+    </footer>
+</body>
+</html>

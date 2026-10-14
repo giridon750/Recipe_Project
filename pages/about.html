@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Tasty Bite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Tailwind utilities style the creator panel while the existing CSS preserves the About page layout. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- The stylesheet is shared from the sibling css/ folder. -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- The shared demo-auth guard protects the recipe pages in this browser-only demo. -->
+    <script src="../js/auth.js" defer></script>
+</head>
+<body class="about-page" data-requires-auth>
+    <header class="site-header">
+        <div class="brand-wrap">
+            <div class="brand-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="brand-name">Tasty <span>Bite</span></div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="index.html#recipes">Recipes</a>
+            <a href="planner.html">Meal planner</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="about.html" class="active">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html" data-logout>Log out</a>
+        </nav>
+
+        <div class="header-search">
+            <input type="text" placeholder="Search recipes" aria-label="Search recipes">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="about-copy">
+                <p class="eyebrow">Our story</p>
+                <h1>Cooking joy into every everyday meal.</h1>
+                <p>
+                    Tasty Bite was created for people who want food that feels comforting, fresh, and easy to love.
+                    We bring together simple ingredients, bold flavors, and practical recipes that fit real life.
+                </p>
+                <div class="cta-row">
+                    <a href="index.html" class="btn btn-primary">Explore recipes</a>
+                    <a href="#mission" class="btn btn-secondary">Our mission</a>
+                </div>
+            </div>
+
+            <div class="about-visual">
+                <div class="image-card large-card"></div>
+                <div class="image-card small-card"></div>
+            </div>
+        </section>
+
+        <section class="stats" aria-label="Key facts about Tasty Bite">
+            <div class="stat-item">
+                <strong>1200+</strong>
+                <span>Recipes shared</span>
+            </div>
+            <div class="stat-item">
+                <strong>85K</strong>
+                <span>Happy home cooks</span>
+            </div>
+            <div class="stat-item">
+                <strong>4.9/5</strong>
+                <span>Average rating</span>
+            </div>
+            <div class="stat-item">
+                <strong>24/7</strong>
+                <span>Meal inspiration</span>
+            </div>
+        </section>
+
+        <section class="mission-section" id="mission">
+            <div class="section-heading">
+                <p class="eyebrow">Why we exist</p>
+                <h2>Healthy eating should feel simple and satisfying.</h2>
+            </div>
+
+            <div class="mission-grid">
+                <article class="info-card">
+                    <div class="icon-wrap green"><i class="fa-solid fa-seedling"></i></div>
+                    <h3>Fresh ingredients</h3>
+                    <p>We focus on nourishing, seasonal ingredients that make everyday meals feel vibrant and full of life.</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="icon-wrap orange"><i class="fa-solid fa-heart"></i></div>
+                    <h3>Designed for real life</h3>
+                    <p>Each idea is made to be realistic, budget-friendly, and easy enough for busy schedules and family routines.</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="icon-wrap blue"><i class="fa-solid fa-users"></i></div>
+                    <h3>Built for community</h3>
+                    <p>We celebrate flavors, stories, and traditions from kitchens around the world to inspire creativity at home.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="story-section">
+            <div class="story-image"></div>
+            <div class="story-copy">
+                <p class="eyebrow">Our approach</p>
+                <h2>Food that brings people together.</h2>
+                <p>
+                    We believe cooking should feel inspiring, not intimidating. That is why our recipes balance flavor, balance,
+                    and ease so anyone can create something meaningful from the comfort of home.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Quick recipes for busy weeknights</li>
+                    <li><i class="fa-solid fa-check"></i> Family-friendly meals with comforting flavors</li>
+                    <li><i class="fa-solid fa-check"></i> Seasonal inspiration to keep cooking fun</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Personal creator identity: the panel stacks on mobile and splits into two columns at md. -->
+        <section class="my-14 overflow-hidden rounded-3xl border border-emerald-950/10 bg-white shadow-xl md:my-20" aria-labelledby="creator-heading">
+            <div class="grid md:grid-cols-[0.8fr_1.2fr]">
+                <div class="flex flex-col items-center justify-center gap-5 bg-emerald-950 px-6 py-10 text-center text-white sm:px-10 sm:py-14">
+                    <div class="grid h-24 w-24 place-items-center rounded-3xl border border-white/20 bg-white/10 shadow-inner sm:h-28 sm:w-28" aria-label="Giri monogram">
+                        <span class="font-serif text-6xl font-bold text-orange-300 sm:text-7xl">G</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase text-orange-300">The person behind Tasty Bite</p>
+                        <p class="mt-2 font-serif text-3xl font-bold sm:text-4xl">Giri</p>
+                    </div>
+                    <p class="border-t border-white/20 pt-4 font-serif text-lg italic text-emerald-50">Crafted with care by <span class="font-bold text-orange-300">Giri</span></p>
+                </div>
+
+                <div class="flex flex-col justify-center px-6 py-9 sm:px-10 sm:py-12 lg:px-14">
+                    <p class="mb-3 text-xs font-bold uppercase text-emerald-700">A note from the creator</p>
+                    <h2 id="creator-heading" class="font-serif text-3xl font-bold text-emerald-950 sm:text-4xl">About the Creator</h2>
+                    <p class="mt-4 text-lg font-semibold text-emerald-800">I'm Giri, the creator of Tasty Bite.</p>
+                    <div class="mt-7 border-t border-emerald-950/10 pt-6">
+                        <h3 class="font-serif text-2xl font-bold text-emerald-950">My Story</h3>
+                        <p class="mt-3 max-w-2xl leading-7 text-stone-600">
+                            I created Tasty Bite to make finding a recipe for the day feel simple, and saving a good one for later just as easy. It brings everyday meal ideas together in one place, so people can explore at their own pace and keep the recipes they want to come back to.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="brand-wrap footer-brand-wrap">
+                    <div class="brand-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="brand-name">Tasty <span>Bite</span></div>
+                </div>
+                <p>Better food. Happier homes.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick links</h4>
+                <a href="index.html">Home</a>
+                <a href="index.html#recipes">Recipes</a>
+                <a href="planner.html">Meal planner</a>
+                <a href="favorites.html">Favorites</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <a href="#">Breakfast</a>
+                <a href="#">Lunch</a>
+                <a href="#">Dinner</a>
+                <a href="#">Dessert</a>
+            </div>
+
+            <div class="footer-links social-links">
+                <h4>Follow us</h4>
+                <div class="social-icons">
+                    <span><i class="fa-brands fa-facebook-f"></i></span>
+                    <span><i class="fa-brands fa-instagram"></i></span>
+                    <span><i class="fa-brands fa-youtube"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Tasty Bite. Made for food lovers.</p>
+        </div>
+    </footer>
+</body>
+</html>
